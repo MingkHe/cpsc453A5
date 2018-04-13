@@ -1,0 +1,93 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.pdb
+*.lib
+*.idb
+*.tlog
+Debug/
+DebugGLEW/
+Release/
+ReleaseGLEW/
+RenderingEngine/Debug/*.obj
+RenderingEngine/DebugGLEW/
+RenderingEngine/Release/*.obj
+RenderingEngine/ReleaseGLEW/
+RenderingLibrary/Debug/*.obj
+RenderingLibrary/Release/*.obj
+RenderingLibrary/DebugGLEW/
+RenderingLibrary/ReleaseGLEW/
+RenderingExtensions/Debug/*.obj
+RenderingExtensions/DebugGLEW/
+RenderingExtensions/Release/*.obj
+RenderingExtensions/ReleaseGLEW/
+RenderingEngine/x64/Debug/*.obj
+RenderingEngine/x64/Release/*.obj
+RenderingLibrary/x64/Debug/*.obj
+RenderingLibrary/x64/Release/*.obj
+RenderingExtensions/x64/Debug/*.obj
+RenderingExtensions/x64/Release/*.obj
+RenderingExtensions/obj/
+RenderingLibrary/obj/
+RenderingEngine/obj/
+RenderingEngine/untrackedmodels/
+*.db
+RenderingEngine.VC.VC.opendb
+*.exe
+Debug/RenderingEngine.ilk
+*.log
+RenderingEngine/Debug/RenderingEngine.pch
+*.suo
+Debug/SampleTest.ilk
+*.pch
+*.ipch
+*.a
+*.out
+*.opensdf
+RenderingEngine.sdf
+GLFW/obj
