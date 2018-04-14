@@ -36,6 +36,18 @@ using namespace glm;
 
 #define PI_F 3.14159265359f
 
+float scaler =1.0;
+
+struct planet
+{
+	planet* parent;
+	vector<vec3> linesColor;
+	mat4 transform;
+	vector<vec3> origin;
+	float radius;
+	//image | texture
+};
+
 void QueryGLVersion();
 bool CheckGLErrors();
 
@@ -210,14 +222,24 @@ void triangulateSphere(float originX, float originY, float radius, vector<vec3>*
 	float thetaNum = 20;
 	float thetaStep = PI_F/(thetaNum-1);
 
-	for(float theta=0; theta<2*PI_F; theta += thetaStep){
+	for(float theta=0; theta<PI_F; theta += thetaStep){
 		for(float phi=0; phi<2*PI_F; phi += phiStep){
 			data->push_back(s(theta,phi,radius));
+			data->push_back(s(theta,phi+phiStep,radius));
+			data->push_back(s(theta+thetaStep,phi,radius));
 			data->push_back(s(theta,phi+phiStep,radius));
 			data->push_back(s(theta+thetaStep,phi,radius));
 			data->push_back(s(theta+thetaStep,phi+phiStep,radius));
 		}
 	}
+
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	scaler=scaler-yoffset*0.2;
+	if(scaler<0.2)
+		scaler=0.2;
 
 }
 
@@ -249,6 +271,7 @@ int main(int argc, char *argv[])
 
 	// set keyboard callback function and make our context current (active)
 	glfwSetKeyCallback(window, KeyCallback);
+	glfwSetScrollCallback(window, scroll_callback);
 	glfwMakeContextCurrent(window);
 
 	//Intialize GLAD
@@ -351,16 +374,16 @@ int main(int argc, char *argv[])
 		//Translation
 		vec3 movement(0.f);
 
-		if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			movement.z += 1.f;
-		if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			movement.z -= 1.f;
-		if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			movement.x += 1.f;
-		if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			movement.x -= 1.f;
+		//if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			//movement.z += 1.f;
+		//if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			//movement.z -= 1.f;
+		//if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+			//movement.x += 1.f;
+		//if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			//movement.x -= 1.f;
 		
-		cam.move(movement*movementSpeed);
+		//cam.move(movement*movementSpeed);
 		
 
 		//Rotation
@@ -370,11 +393,30 @@ int main(int argc, char *argv[])
 		vec2 cursorChange = cursorPos - lastCursorPos;
 
 		if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
-			cam.rotateHorizontal(-cursorChange.x*cursorSensitivity);
-			cam.rotateVertical(-cursorChange.y*cursorSensitivity);
+			//cam.rotateHorizontal(-cursorChange.x*cursorSensitivity);
+			//cam.rotateVertical(-cursorChange.y*cursorSensitivity);
+			cam.move2(-cursorChange.y*cursorSensitivity,-cursorChange.x*cursorSensitivity);
 		}
+		
+		if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
+			movement.z += 1.f;
+		}
+		if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
+			movement.z -= 1.f;
+		}
+		if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
+			movement.x += 1.f;
+		}
+		if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
+			movement.x -= 1.f;
+		}
+		//cam.move2(movement.z*movementSpeed,movement.x*movementSpeed);
 
 		lastCursorPos = cursorPos;
+		
+		//cout<<movement.x*movementSpeed<<endl;
+		
+		cam.scale(scaler);
 	
 		///////////
 		//Drawing
@@ -387,7 +429,7 @@ int main(int argc, char *argv[])
 		//RenderScene(&geometry, program, vec3(1, 0, 0), &cam, perspectiveMatrix, GL_TRIANGLES);
 		//RenderScene(&frustumGeometry, program, vec3(0, 1, 0), &cam, perspectiveMatrix, GL_LINE_STRIP);
 		
-		RenderScene(&testGeometry, program, vec3(1, 1, 0), &cam, perspectiveMatrix, GL_LINE_STRIP);
+		RenderScene(&testGeometry, program, vec3(1, 1, 0), &cam, perspectiveMatrix, GL_TRIANGLES);
 
 		glfwSwapBuffers(window);
 
