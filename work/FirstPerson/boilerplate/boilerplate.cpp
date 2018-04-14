@@ -395,7 +395,8 @@ int main(int argc, char *argv[])
 		if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
 			//cam.rotateHorizontal(-cursorChange.x*cursorSensitivity);
 			//cam.rotateVertical(-cursorChange.y*cursorSensitivity);
-			cam.move2(-cursorChange.y*cursorSensitivity,-cursorChange.x*cursorSensitivity);
+			//cam.move2(-cursorChange.y*cursorSensitivity,-cursorChange.x*cursorSensitivity);
+			//cam.move2(cursorChange.y*cursorSensitivity,cursorChange.x*cursorSensitivity);
 		}
 		
 		if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
@@ -410,7 +411,7 @@ int main(int argc, char *argv[])
 		if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
 			movement.x -= 1.f;
 		}
-		//cam.move2(movement.z*movementSpeed,movement.x*movementSpeed);
+		cam.move3(movement.z*movementSpeed,movement.x*movementSpeed);
 
 		lastCursorPos = cursorPos;
 		
