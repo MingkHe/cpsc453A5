@@ -15,8 +15,6 @@ glm::mat4 Camera::viewMatrix() const{
 	//mat4 cTranslation = glm::translate(mat4(1.f), -pos);
 	//return cRotation*cTranslation;
 	
-	float theta = acos(pos.y/radius);
-	float phi = asin(pos.x/radius);
 	cout<<"Theta: "<<theta<<endl;
 	cout<<"Phi: "<<phi<<endl;	
 	
