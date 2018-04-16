@@ -19,3 +19,36 @@ make clean
 	Deletes executable, object files and object directory
 
 Note: This is designed for linux, however it may work on Mac OSX, while it is untested. For a more reliable version, download the xcode version.
+
+//----------------------------------------------------------------------
+Key board operation:
+KEY 1: make camera focus on mercury
+KEY 2: make camera focus on venus
+KEY 3: make camera focus on earth
+KEY 4: make camera focus on mars
+KEY 5: make camera focus on jupiter
+KEY 6: make camera focus on saturn
+KEY 7: make camera focus on uranus
+KEY 8: make camera focus on neptune
+KEY 9: make camera focus on moon
+KEY 0: make camera focus on sun
+
+KEY G: start/stop animation
+
+KEY UP: increase animation speed
+KEY DOWN: decrease animation speed
+
+KEY W: rotate camera up
+KEY A: rotate camera down
+KEY S: rotate camera left
+KEY D: rotate camera right
+
+Mouse operation:
+Drag: rotate camera
+Scroll: scale the view
+
+Bonus:
+1. finish Day/Night textures for the earth
+2. add ability to slow down or speed up the animation
+3. center the cameraon different planet
+4. add planets in the solar system.
