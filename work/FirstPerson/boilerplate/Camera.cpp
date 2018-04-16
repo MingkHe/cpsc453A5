@@ -15,10 +15,10 @@ glm::mat4 Camera::viewMatrix() const{
 	//mat4 cTranslation = glm::translate(mat4(1.f), -pos);
 	//return cRotation*cTranslation;
 	
-	cout<<"Theta: "<<theta<<endl;
-	cout<<"Phi: "<<phi<<endl;	
+	//cout<<"Theta: "<<theta<<endl;
+	//cout<<"Phi: "<<phi<<endl;	
 	
-	return lookAt(pos,vec3(0,0,0),up);
+	return lookAt(pos,lookat,up);
 }
 
 void Camera::rotateVertical(float radians){
@@ -43,7 +43,7 @@ void Camera::rotateHorizontal(float radians){
 }
 
 void Camera::move2(float deltaTheta, float deltaPhi){
-	if(theta>= 0 && theta<=3.14159265359f/2){
+	if(theta+deltaTheta>= 0 && theta+deltaTheta<=3.14159265359f/2){
 	float theta = acos(pos.y/radius)+deltaTheta;
 	
 	float phi = asin(pos.z/(radius*sin(theta)))+deltaPhi;
@@ -60,8 +60,15 @@ void Camera::move3(float deltaTheta, float deltaPhi){
 	//float theta = acos(pos.y/radius)+deltaTheta;
 	//float phi = asin(pos.x/radius)+deltaPhi;
 	theta = theta+deltaTheta;
+	if(theta >= 3.1f){
+		theta = 3.1f;
+	}else if(theta<= 0.1f){
+		theta = 0.1f;
+	}
+	
+	theta = theta+deltaTheta;
 	phi = phi+deltaPhi;
-	pos = vec3(radius*sin(theta)*cos(phi),radius*cos(theta),radius*sin(theta)*sin(phi));
+	pos = lookat+vec3(radius*sin(theta)*sin(phi),radius*cos(theta),radius*sin(theta)*cos(phi));
 	//pos.x = radius*sin(theta)*cos(phi);
 	//pos.y = radius*cos(theta);
 	//pos.z = radius*sin(theta)*sin(phi);
@@ -73,10 +80,7 @@ void Camera::move3(float deltaTheta, float deltaPhi){
 
 void Camera::scale(float level){
 	
-	pos.x = level*sin(asin(pos.x/radius));
-	pos.z = level*cos(asin(pos.x/radius));
-	pos.y = level*sin(asin(pos.y/radius));
-	radius = level;
+	radius = level*radius;
 }
 
 
